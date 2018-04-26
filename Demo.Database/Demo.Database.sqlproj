@@ -63,6 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Games.sql" />
-    <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <None Include="Scripts\Defaultdata.sql" />
   </ItemGroup>
 </Project>

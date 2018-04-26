@@ -34,7 +34,11 @@ namespace Demo.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x=> x.AllowAnyOrigin());
+
             app.UseMvc();
+
+
         }
     }
 }
