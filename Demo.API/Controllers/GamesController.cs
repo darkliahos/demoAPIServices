@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Demo.API.Models;
 using Demo.EF;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +36,34 @@ namespace Demo.API.Controllers
             }
 
             return Json(game);
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/echo/{text}")]
+        public JsonResult Echo(string text)
+        {
+            return Json(text);
+        }
+
+        [HttpPost]
+        [Route("api/[controller]/payload")]
+        
+        public ActionResult EchoPost([FromBody]PayloadTest payloadTest)
+        {
+            if (!string.IsNullOrEmpty(payloadTest.name))
+            {
+                return Ok("f");
+            }
+            else
+            {
+                return BadRequest(new ValidationErrors[] {
+                    new ValidationErrors
+                    {
+                        fieldId = "name",
+                        message = "Please enter a name"
+                    }
+                });
+            }
         }
     }
 }

@@ -24,7 +24,18 @@ namespace Demo.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "_myAllowSpecificOrigins",
+                                  builder =>
+                                  builder.AllowAnyOrigin()
+                                  .AllowAnyMethod()
+                                  .AllowAnyHeader()
+                                  .AllowCredentials());
+            });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -34,7 +45,7 @@ namespace Demo.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(x=> x.AllowAnyOrigin());
+            app.UseCors("_myAllowSpecificOrigins");
 
             app.UseMvc();
 
